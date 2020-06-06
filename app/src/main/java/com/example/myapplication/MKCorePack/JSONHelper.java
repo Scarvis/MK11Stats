@@ -38,7 +38,32 @@ public class JSONHelper {
                 }
             }
         }
+        return false;
+    }
 
+    public static boolean addToJSON(Context context, List<Kombat> dataList) {
+        Gson gson = new Gson();
+        DataItems dataItems = new DataItems();
+        dataItems.setKombats(dataList);
+        String jsonString = gson.toJson(dataItems);
+
+        FileOutputStream fileOutputStream = null;
+
+        try {
+            fileOutputStream = context.openFileOutput(FILE_NAME, Context.MODE_APPEND);
+            fileOutputStream.write(jsonString.getBytes());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         return false;
     }
 

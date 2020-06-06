@@ -11,7 +11,7 @@ public class Character implements Serializable {
     private int id;
     private String name;
     private Variation variation = new Variation();
-    private ArrayList<Variation> VariationsList = new ArrayList<>();
+    private ArrayList<Variation> variationsList = new ArrayList<>();
     private int characterResource = 0;
 
     public Character() {
@@ -21,6 +21,7 @@ public class Character implements Serializable {
     public Character(String name, Variation variation, int characterResource) {
         this.name = name;
         this.variation = new Variation(variation);
+        this.variationsList.add(variation);
         this.characterResource = characterResource;
     }
     public Character(Character character) {
@@ -28,6 +29,7 @@ public class Character implements Serializable {
         this.name = character.name;
         this.variation = new Variation(character.variation);
         this.characterResource = character.characterResource;
+        this.variationsList = character.variationsList;
     }
     public void SetId(int id) {
         this.id = id;
@@ -37,6 +39,7 @@ public class Character implements Serializable {
     }
     public void SetVariation(Variation variation) {
         this.variation = new Variation(variation);
+        this.variationsList.add(variation);
     }
     public void Set(Character character) {
         this.id = character.id;
@@ -59,6 +62,10 @@ public class Character implements Serializable {
 
     public String getNameVariation() {
         return this.variation.getTitle();
+    }
+
+    public ArrayList<Variation> getVariationsList() {
+        return this.variationsList;
     }
 
     public int getCharacterResource() {

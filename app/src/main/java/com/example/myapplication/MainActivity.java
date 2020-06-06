@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.Adapters.KombatAdapter;
 import com.example.myapplication.MKCorePack.JSONHelper;
@@ -29,9 +31,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     MKViewModel mkViewModel;
-
+    private static final int REQUEST_PERMISSION_WRITE = 1001;
     List<Kombat> kombatArrayList = new ArrayList();
-    public static final String ACTION ="com.example.myapplication.activitytwo";
+    public static final String ACTION = "com.example.myapplication.activitytwo";
 //    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 //            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 //
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 //        KombatAdapter kombatAdapter = new KombatAdapter(this, R.layout.kombat_list_item, kombatArrayList);
 //        kombatListView.setAdapter(kombatAdapter);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.bottom_navigation_view_menu, menu);
@@ -78,21 +81,31 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         TextView tv = findViewById(R.id.KombatTVid);
         tv.setText(item.getTitle());
-        if(item.getTitle().equals("kombats")) {
+        if (item.getTitle().toString().equals("kombats")) {
             Intent intent = new Intent(this, ActivityTwo.class);
             intent.putExtra(ArrayList.class.getSimpleName(), mkViewModel.GetKombatsList());
+            startActivity(intent);
+        } else if (item.getTitle().toString().equals("add new kombat")) {
+            Intent intent = new Intent(this, activity_add_kombat.class);
+            intent.putExtra(ArrayList.class.getSimpleName(), mkViewModel.GetCharactersList());
+            startActivity(intent);
+        } else if (item.getTitle().toString().equals("profile")) {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            //intent.putExtra(ArrayList.class.getSimpleName(), mkViewModel.GetCharactersList());
+            startActivity(intent);
+        } else if (item.getTitle().toString().equals("news")) {
+            Intent intent = new Intent(this, NewsActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     public void addNewKombat(View view) {
         //mkViewModel.addNewKombat();
     }
 
     private void Initialize() {
-//        Character scorp = new Character("Scorpion", new Variation("Hellfire"), R.drawable.scorpion);
-//        Character sub = new Character("Sub Zero", new Variation("Ice"), R.drawable.sub_zero);
 //        kombatArrayList.add(new Kombat(scorp, sub, 0));
 //        kombatArrayList.add(new Kombat(scorp, sub, 1));
 //        kombatArrayList.add(new Kombat(sub, scorp, 0));

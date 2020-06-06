@@ -59,13 +59,15 @@ public class MKViewModel extends AppCompatActivity {
         mkCore.setKombatsList(kombatsList);
     }
 
-    public ArrayList<Character> GetCharactersList(){
+    public ArrayList<Character> GetCharactersList() {
         return mkCore.GetCharactersList();
     }
 
-    public ArrayList<Kombat> GetKombatsList() { return mkCore.GetKombatsList();}
+    public ArrayList<Kombat> GetKombatsList() {
+        return mkCore.GetKombatsList();
+    }
 
-    public boolean SetPathToInitializeCharactersList(String path){
+    public boolean SetPathToInitializeCharactersList(String path) {
         return mkCore.SetPathToInitializeCharactersList(path);
     }
 }

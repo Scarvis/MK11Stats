@@ -29,8 +29,7 @@ public class ActivityTwo extends AppCompatActivity {
 
         if (arguments != null) {
             kombatArrayList = (ArrayList<Kombat>) arguments.getSerializable(ArrayList.class.getSimpleName());
-        }
-        else {
+        } else {
             return;
         }
         ListView kombatListView = findViewById(R.id.DKombatListViewId);
