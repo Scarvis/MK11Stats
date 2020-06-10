@@ -30,13 +30,13 @@ public class NewsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        mEditText = (EditText) findViewById(R.id.rssFeedEditText);
-        mFetchFeedButton = (Button) findViewById(R.id.fetchFeedButton);
-        mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        mFeedTitleTextView = (TextView) findViewById(R.id.feedTitle);
-        mFeedDescriptionTextView = (TextView) findViewById(R.id.feedDescription);
-        mFeedLinkTextView = (TextView) findViewById(R.id.feedLink);
+//        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+//        mEditText = (EditText) findViewById(R.id.rssFeedEditText);
+//        mFetchFeedButton = (Button) findViewById(R.id.fetchFeedButton);
+//        mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+//        mFeedTitleTextView = (TextView) findViewById(R.id.feedTitle);
+//        mFeedDescriptionTextView = (TextView) findViewById(R.id.feedDescription);
+//        mFeedLinkTextView = (TextView) findViewById(R.id.feedLink);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 

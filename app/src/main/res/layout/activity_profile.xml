@@ -16,9 +16,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nickname"
+                android:text="Nickname:"
                 android:layout_marginRight="15dp"/>
             <TextView
+                android:id="@+id/nicknameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Scarvis"/>
@@ -29,9 +30,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total games"
+                android:text="Current MMR:"
                 android:layout_marginRight="15dp"/>
             <TextView
+                android:id="@+id/currentMMRTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1234"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total games:"
+                android:layout_marginRight="15dp"/>
+            <TextView
+                android:id="@+id/totalGamesTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="123"/>
@@ -42,20 +58,51 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Favorite character"
+                android:text="Your favorite character:"
                 android:layout_marginRight="15dp"/>
             <TextView
+                android:id="@+id/favoriteCharacterTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Scorpion"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WinRate:"
+                android:layout_marginRight="15dp"/>
+            <TextView
+                android:id="@+id/winRateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N/A"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ranked WinRate:"
+                android:layout_marginRight="15dp"/>
+            <TextView
+                android:id="@+id/winRateRankedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N/A"/>
+        </LinearLayout>
         <Button
+            android:id="@+id/gamesHistoryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="N games"
             android:textAlignment="viewStart"
             android:onClick="gamesStats"/>
         <ListView
+            android:id="@+id/kombatLeagueSeasonsListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

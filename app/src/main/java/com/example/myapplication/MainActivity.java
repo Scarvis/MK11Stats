@@ -23,7 +23,9 @@ import com.example.myapplication.MKCorePack.Kombat;
 import com.example.myapplication.MKCorePack.Variation;
 import com.example.myapplication.MKCorePack.Character;
 import com.example.myapplication.ViewModels.HomeFragment;
+import com.example.myapplication.ViewModels.KombatsListViewModel;
 import com.example.myapplication.ViewModels.MKViewModel;
+import com.example.myapplication.ViewModels.ProfileViewModel;
 //import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     MKViewModel mkViewModel;
     private static final int REQUEST_PERMISSION_WRITE = 1001;
-    List<Kombat> kombatArrayList = new ArrayList();
+    ArrayList<Kombat> kombatArrayList = new ArrayList<Kombat>();
     public static final String ACTION = "com.example.myapplication.activitytwo";
 //    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 //            = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,9 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         mkViewModel = new MKViewModel();
         Initialize();
-//        ListView kombatListView = findViewById(R.id.KombatListViewId);
-//        KombatAdapter kombatAdapter = new KombatAdapter(this, R.layout.kombat_list_item, kombatArrayList);
-//        kombatListView.setAdapter(kombatAdapter);
+
     }
 
     @Override
@@ -83,19 +83,20 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(item.getTitle());
         if (item.getTitle().toString().equals("kombats")) {
             Intent intent = new Intent(this, ActivityTwo.class);
-            intent.putExtra(ArrayList.class.getSimpleName(), mkViewModel.GetKombatsList());
+            intent.putExtra(KombatsListViewModel.class.getSimpleName(), mkViewModel.getKombatsListViewModel());
             startActivity(intent);
         } else if (item.getTitle().toString().equals("add new kombat")) {
             Intent intent = new Intent(this, activity_add_kombat.class);
-            intent.putExtra(ArrayList.class.getSimpleName(), mkViewModel.GetCharactersList());
+            intent.putExtra(ArrayList.class.getSimpleName(), mkViewModel.getCharactersList());
             startActivity(intent);
         } else if (item.getTitle().toString().equals("profile")) {
             Intent intent = new Intent(this, ProfileActivity.class);
-            //intent.putExtra(ArrayList.class.getSimpleName(), mkViewModel.GetCharactersList());
+            intent.putExtra(ProfileViewModel.class.getSimpleName(), mkViewModel.getProfileViewModel());
+            intent.putExtra(KombatsListViewModel.class.getSimpleName(), mkViewModel.getKombatsListViewModel());
             startActivity(intent);
         } else if (item.getTitle().toString().equals("news")) {
-            Intent intent = new Intent(this, NewsActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(this, NewsActivity.class);
+//            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

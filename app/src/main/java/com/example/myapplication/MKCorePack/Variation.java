@@ -3,7 +3,7 @@ package com.example.myapplication.MKCorePack;
 import java.io.Serializable;
 
 public class Variation implements Serializable {
-    String title;
+    private String title;
 
     public Variation() {
         title = "DEFAULT";

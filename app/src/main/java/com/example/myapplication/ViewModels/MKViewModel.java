@@ -3,36 +3,51 @@ package com.example.myapplication.ViewModels;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
-import android.view.View;
-import android.widget.ListView;
-
-import com.example.myapplication.Adapters.KombatAdapter;
 import com.example.myapplication.MKCorePack.Character;
 import com.example.myapplication.MKCorePack.Kombat;
 import com.example.myapplication.MKCorePack.MKCore;
-import com.example.myapplication.R;
+import com.example.myapplication.MKCorePack.Player;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MKViewModel extends AppCompatActivity {
-    MKCore mkCore;
-
-    ListView kombatListView;
+    private MKCore mkCore;
+    private ProfileViewModel profileViewModel;
+    private KombatsListViewModel kombatsListViewModel;
 
     private static final String TAG = "myLogs";
 
     public MKViewModel() {
-        Initialize();
+        initialize();
     }
 
-    private void Initialize() {
+    private void initialize() {
         mkCore = new MKCore();
         initKombatsList();
         initButtons();
+        initProfileViewModel();
+        initKombatsListViewModel();
+    }
 
+    private void initProfileViewModel() {
+        Player player = mkCore.getOwnPlayer();
+        int totalGames = mkCore.getTotalGames();
+        Character favoriteCharacter = new Character(player.getFavoriteCharacter());
+        double rankedWinRate = mkCore.getRankedWinRate();
+        double winRate = mkCore.getWinRate();
+
+        profileViewModel = new ProfileViewModel(
+                totalGames,
+                winRate,
+                rankedWinRate,
+                favoriteCharacter,
+                mkCore.getKombatsList(),
+                player
+        );
+    }
+
+    private void initKombatsListViewModel() {
+        kombatsListViewModel = new KombatsListViewModel(mkCore.getKombatsList());
     }
 
     private void initButtons() {
@@ -55,19 +70,24 @@ public class MKViewModel extends AppCompatActivity {
 
     }
 
-    public void setKombatsList(List<Kombat> kombatsList) {
+    public void setKombatsList(ArrayList<Kombat> kombatsList) {
         mkCore.setKombatsList(kombatsList);
+        kombatsListViewModel.setKombatArrayList(kombatsList);
     }
 
-    public ArrayList<Character> GetCharactersList() {
-        return mkCore.GetCharactersList();
+    public ArrayList<Character> getCharactersList() {
+        return mkCore.getCharactersList();
     }
 
-    public ArrayList<Kombat> GetKombatsList() {
-        return mkCore.GetKombatsList();
+    public ArrayList getKombatsList() {
+        return mkCore.getKombatsList();
     }
 
-    public boolean SetPathToInitializeCharactersList(String path) {
-        return mkCore.SetPathToInitializeCharactersList(path);
+    public ProfileViewModel getProfileViewModel() {
+        return profileViewModel;
+    }
+
+    public KombatsListViewModel getKombatsListViewModel() {
+        return kombatsListViewModel;
     }
 }

@@ -8,25 +8,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MKCore {
-    ArrayList<Character> characterList = new ArrayList<>();
-    String pathToInitializeCharactersList;
-    DataProvider dataProvider = new DataProvider();
-    List<Kombat> kombatsList = new ArrayList<>();
+    private ArrayList<Character> characterList = new ArrayList<>();
+    private String pathToInitializeCharactersList;
+    private DataProvider dataProvider = new DataProvider();
+    private ArrayList<Kombat> kombatsList = new ArrayList<>();
     //#TEST
-    Player ownPlayer = new Player("Scarvis", 1453);
+    private Player ownPlayer = new Player("Scarvis", 1453);
 
     public MKCore() {
         initialize();
     }
 
     private void initialize() {
-        pathToInitializeCharactersList = "";
+        //pathToInitializeCharactersList = "";
         //InitKombatList();
-        InitCharactersList();
-        ownPlayer.setOwnPlayer();
+        initCharactersList();
+        //ownPlayer.setOwnPlayer();
+        initPlayer();
+
     }
 
-    private void InitCharactersList() {
+    private void initPlayer() {
+        PlayerStats playerStats = new PlayerStats(
+                0.4,
+                0.4,
+                new Character("Sub Zero", new Variation("Ice"), R.drawable.sub_zero),
+                3
+        );
+    }
+
+    private void initCharactersList() {
         Character scorp = new Character("Scorpion", new Variation("Hellfire"), R.drawable.scorpion);
         Character sub = new Character("Sub Zero", new Variation("Ice"), R.drawable.sub_zero);
         characterList.add(scorp);
@@ -34,7 +45,7 @@ public class MKCore {
         //characterList = dataProvider.GetCharactersList(pathToInitializeCharactersList);
     }
 
-    public void InitKombatList(Context context) {
+    public void initKombatList(Context context) {
         kombatsList = JSONHelper.importFromJSON(context);
     }
 
@@ -42,25 +53,41 @@ public class MKCore {
 
     }
 
-    public void setKombatsList(List<Kombat> kombatsList) {
+    public void setKombatsList(ArrayList<Kombat> kombatsList) {
         this.kombatsList = kombatsList;
     }
 
-    public ArrayList<Character> GetCharactersList() {
+    public ArrayList<Character> getCharactersList() {
         return characterList;
     }
 
-    public ArrayList<Kombat> GetKombatsList() {
-        return (ArrayList) kombatsList;
+    public ArrayList<Kombat> getKombatsList() {
+        return kombatsList;
     }
 
-    public boolean SetPathToInitializeCharactersList(String path) {
+    public boolean setPathToInitializeCharactersList(String path) {
         if (dataProvider.ValidatePath(path).IsSuccess()) {
             pathToInitializeCharactersList = path;
             return true;
         } else {
             return false;
         }
+    }
+
+    public Player getOwnPlayer() {
+        return ownPlayer;
+    }
+
+    public int getTotalGames() {
+        return kombatsList.size();
+    }
+
+    public double getRankedWinRate() {
+        return ownPlayer.getRankedWinRate();
+    }
+
+    public double getWinRate() {
+        return ownPlayer.getWinRate();
     }
 }
 

@@ -9,13 +9,14 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JSONHelper {
     private static final String FILE_NAME = "data.json";
     private static final String CHARACTERS_NAME = "characters.json";
 
-    public static boolean exportToJSON(Context context, List<Kombat> dataList) {
+    public static boolean exportToJSON(Context context, ArrayList<Kombat> dataList) {
         Gson gson = new Gson();
         DataItems dataItems = new DataItems();
         dataItems.setKombats(dataList);
@@ -41,7 +42,7 @@ public class JSONHelper {
         return false;
     }
 
-    public static boolean addToJSON(Context context, List<Kombat> dataList) {
+    public static boolean addToJSON(Context context, ArrayList<Kombat> dataList) {
         Gson gson = new Gson();
         DataItems dataItems = new DataItems();
         dataItems.setKombats(dataList);
@@ -67,7 +68,7 @@ public class JSONHelper {
         return false;
     }
 
-    public static List<Kombat> importFromJSON(Context context) {
+    public static ArrayList<Kombat> importFromJSON(Context context) {
         InputStreamReader streamReader = null;
         FileInputStream fileInputStream = null;
         try{
@@ -134,12 +135,12 @@ public class JSONHelper {
     }
 
     private static class DataItems {
-        private List<Kombat> kombats;
+        private ArrayList<Kombat> kombats;
 
-        List<Kombat> getKombats() {
+        ArrayList<Kombat> getKombats() {
             return kombats;
         }
-        void setKombats(List<Kombat> kombats) {
+        void setKombats(ArrayList<Kombat> kombats) {
             this.kombats = kombats;
         }
     }
