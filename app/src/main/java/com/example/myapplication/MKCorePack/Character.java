@@ -12,44 +12,75 @@ public class Character implements Serializable {
     private String name;
     private Variation variation = new Variation();
     private ArrayList<Variation> variationsList = new ArrayList<>();
-    private int characterResource = 0;
+    private int characterImageResource = 0;
+    private DLCCharacter dlc = new DLCCharacter();
+
+
+    private static ArrayList<Character> characterArrayList;
 
     public Character() {
         this.id = 0;
         this.name = "DEFAULT";
     }
-    public Character(String name, Variation variation, int characterResource) {
+    public Character(String name, Variation variation, int characterImageResource) {
         this.name = name;
         this.variation = new Variation(variation);
         this.variationsList.add(variation);
-        this.characterResource = characterResource;
+        this.characterImageResource = characterImageResource;
     }
+
+    public Character(int id, String name, Variation variation, int characterImageResource) {
+        this.id = id;
+        this.name = name;
+        this.variation = variation;
+        this.characterImageResource = characterImageResource;
+    }
+
+    public Character(int id, String name, ArrayList<Variation> variationsList, int characterImageResource, DLCCharacter dlc) {
+        this.id = id;
+        this.name = name;
+        this.variationsList = variationsList;
+        this.characterImageResource = characterImageResource;
+        this.dlc = dlc;
+    }
+
     public Character(Character character) {
         this.id = character.id;
         this.name = character.name;
         this.variation = new Variation(character.variation);
-        this.characterResource = character.characterResource;
+        this.characterImageResource = character.characterImageResource;
         this.variationsList = character.variationsList;
+        this.dlc = new DLCCharacter(character.dlc);
     }
-    public void SetId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
-    public void SetName( String name) {
+    public void setName( String name) {
         this.name = name;
     }
-    public void SetVariation(Variation variation) {
+    public void setVariation(Variation variation) {
         this.variation = new Variation(variation);
-        this.variationsList.add(variation);
     }
-    public void Set(Character character) {
-        this.id = character.id;
-        this.name = character.name;
-        this.variation = new Variation(character.variation);
+    public void setVariation(int id) {
+        for(Variation var : variationsList) {
+            if(var.getId() == id) {
+                variation = new Variation(var);
+                return;
+            }
+        }
+        variation = new Variation();
     }
-    public void Set(int id, String name, Variation variation) {
-        this.id = id;
-        this.name = name;
-        this.variation = new Variation(variation);
+
+    public static void setCharacterArrayList(ArrayList<Character> characters) {
+        characterArrayList = characters;
+    }
+
+    public static Character getCharacterById(int id) {
+        for (int i = 0; i < characterArrayList.size(); i++) {
+            if (characterArrayList.get(i).getId() == id)
+                return characterArrayList.get(i);
+        }
+        return new Character();
     }
 
     public int getId() {
@@ -60,8 +91,16 @@ public class Character implements Serializable {
         return this.name;
     }
 
-    public String getNameVariation() {
-        return this.variation.getTitle();
+    public Variation getVariation() {
+        return this.variation;
+    }
+
+    public Variation getVariation(int id) {
+        for (Variation var : variationsList) {
+            if (var.getId() == id)
+                return var;
+        }
+        return new Variation();
     }
 
     public ArrayList<Variation> getVariationsList() {
@@ -69,7 +108,11 @@ public class Character implements Serializable {
     }
 
     public int getCharacterResource() {
-        return this.characterResource;
+        return this.characterImageResource;
+    }
+
+    public DLCCharacter getDlc() {
+        return dlc;
     }
 
     @NonNull

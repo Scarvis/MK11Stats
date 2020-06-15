@@ -1,12 +1,15 @@
 package com.example.myapplication.ViewModels;
 
+import android.content.Context;
+
+import com.example.myapplication.Adapters.DatabaseAdapter;
 import com.example.myapplication.MKCorePack.Kombat;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class KombatsListViewModel implements Serializable {
-    private ArrayList<Kombat> kombatArrayList = new ArrayList<Kombat>();
+    private ArrayList<Kombat> kombatArrayList;
 
     public KombatsListViewModel(ArrayList<Kombat> kombatArrayList) {
         this.kombatArrayList = kombatArrayList;

@@ -31,6 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void gamesStats(View view) {
         Intent intent = new Intent(this, ActivityTwo.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra(KombatsListViewModel.class.getSimpleName(), kombatsListViewModel);
         startActivity(intent);
     }
@@ -70,5 +71,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         KombatAdapter kombatAdapter = new KombatAdapter(this, R.layout.kombat_list_item, kombatsListViewModel.getKombatArrayList());
         listView.setAdapter(kombatAdapter);
+    }
+
+    private void goHome() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 }

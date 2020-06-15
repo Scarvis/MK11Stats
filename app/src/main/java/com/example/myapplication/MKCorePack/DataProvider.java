@@ -35,9 +35,9 @@ public class DataProvider extends AppCompatActivity {
     private Character GetCharacter(String text) {
         Character character = new Character();
 
-        character.SetId(1);
-        character.SetName("Scorpion");
-        character.SetVariation(new Variation("Hellfire"));
+//        character.SetId(1);
+//        character.SetName("Scorpion");
+//        character.SetVariation(new Variation("Hellfire"));
 
         return character;
     }

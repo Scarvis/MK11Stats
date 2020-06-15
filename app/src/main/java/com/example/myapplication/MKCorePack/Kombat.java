@@ -3,13 +3,18 @@ package com.example.myapplication.MKCorePack;
 import java.io.Serializable;
 
 public class Kombat implements Serializable {
-    static int idCounter = 0;
-    int id = 0;
-    Character leftCharacter = new Character();
-    Character rightCharacter = new Character();
+    private static int idCounter = 0;
+    private long id = 0;
+    private Character leftCharacter = new Character();
+    private Character rightCharacter = new Character();
 
-    Player leftPlayer = new Player();
-    Player rightPlayer = new Player();
+    private Player leftPlayer = new Player();
+    private Player rightPlayer = new Player();
+
+    private boolean isRanked = false;
+    private int kombatLeagueSeason = 0;
+
+    private WINNER_SIDE winnerSide = WINNER_SIDE.OWN;
 
     public Kombat() {
         this.id = Kombat.idCounter;
@@ -37,35 +42,46 @@ public class Kombat implements Serializable {
         this.rightPlayer = new Player(rightPlayer);
     }
 
-    public int GetId() {
+    public Kombat(Character leftCharacter, Character rightCharacter, Player leftPlayer, Player rightPlayer,
+                  boolean isRanked, int kombatLeagueSeason, int winnerSide) {
+        this.leftCharacter = leftCharacter;
+        this.rightCharacter = rightCharacter;
+        this.leftPlayer = leftPlayer;
+        this.rightPlayer = rightPlayer;
+        this.isRanked = isRanked;
+        this.kombatLeagueSeason = kombatLeagueSeason;
+        this.winnerSide = WINNER_SIDE.getSide(winnerSide);
+    }
+
+    public Kombat(long id, Character leftCharacter, Character rightCharacter, Player leftPlayer, Player rightPlayer,
+                  boolean isRanked, int kombatLeagueSeason, int winnerSide) {
+        this.id = id;
+        this.leftCharacter = leftCharacter;
+        this.rightCharacter = rightCharacter;
+        this.leftPlayer = leftPlayer;
+        this.rightPlayer = rightPlayer;
+        this.isRanked = isRanked;
+        this.kombatLeagueSeason = kombatLeagueSeason;
+        this.winnerSide = WINNER_SIDE.getSide(winnerSide);
+    }
+
+    public long getId() {
         return this.id;
     }
 
-    public Character GetLeftCharacter() {
+    public Character getLeftCharacter() {
         return this.leftCharacter;
     }
 
-    public Character GetRightCharacter() {
+    public Character getRightCharacter() {
         return this.rightCharacter;
     }
 
-    public Character GetYourCharacter() {
-        if (leftPlayer.getOwnPlayer()) return leftCharacter;
-        if (rightPlayer.getOwnPlayer()) return rightCharacter;
-        return null;
-    }
-
-    public Character GetOpponentCharacter() {
-        if (leftPlayer.getOwnPlayer()) return rightCharacter;
-        if (rightPlayer.getOwnPlayer()) return leftCharacter;
-        return null;
-    }
-
-    public int GetResourceLeftCharacter() {
+    public int getResourceLeftCharacter() {
         return this.leftCharacter.getCharacterResource();
     }
 
-    public int GetResourceRightCharacter() {
+    public int getResourceRightCharacter() {
         return this.rightCharacter.getCharacterResource();
     }
 
@@ -75,5 +91,52 @@ public class Kombat implements Serializable {
 
     public Player getRightPlayer() {
         return this.rightPlayer;
+    }
+
+    public int getIsRankedInt() {
+        if(isRanked) return 1;
+        return 0;
+    }
+
+    public boolean isRanked() {
+        return isRanked;
+    }
+
+    public int getKombatLeagueSeason() {
+        return kombatLeagueSeason;
+    }
+
+    public int getIntWinnerSide() {
+        return WINNER_SIDE.getIntSide(winnerSide);
+    }
+
+    public WINNER_SIDE getWinnerSide() {
+        return winnerSide;
+    }
+
+    public enum WINNER_SIDE {
+        OWN,
+        OPPONENT,
+        OWN_LEAVE,
+        OPPONENT_LEAVE,
+        SERVER_ERROR;
+        public static WINNER_SIDE getSide(int id) {
+            switch (id) {
+                case 1 : return WINNER_SIDE.OWN;
+                case 2 : return WINNER_SIDE.OPPONENT;
+                case 3 : return WINNER_SIDE.OWN_LEAVE;
+                case 4 : return WINNER_SIDE.OPPONENT_LEAVE;
+                default: return SERVER_ERROR;
+            }
+        }
+
+        public static int getIntSide(WINNER_SIDE winner_side) {
+            if(winner_side == WINNER_SIDE.OWN) return 1;
+            if(winner_side == WINNER_SIDE.OPPONENT) return 2;
+            if(winner_side == WINNER_SIDE.OWN_LEAVE) return 3;
+            if(winner_side == WINNER_SIDE.OPPONENT_LEAVE) return 4;
+            return 0;
+        }
+
     }
 }

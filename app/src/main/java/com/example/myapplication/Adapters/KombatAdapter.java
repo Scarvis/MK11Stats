@@ -1,6 +1,7 @@
 package com.example.myapplication.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,21 @@ public class KombatAdapter extends ArrayAdapter<Kombat> {
     private LayoutInflater inflater;
     private int layout;
     private List<Kombat> kombats;
+    private boolean isColor;
+    private boolean isImageVisible;
 
     public KombatAdapter(Context context, int resource, List<Kombat> kombats) {
         super(context, resource, kombats);
         this.kombats = kombats;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
+    }
+
+    public void setColor(boolean isColor){
+        this.isColor = isColor;
+    }
+    public void setImageVisible(boolean isImageVisible){
+        this.isImageVisible = isImageVisible;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -37,14 +47,46 @@ public class KombatAdapter extends ArrayAdapter<Kombat> {
         }
         Kombat kombat = kombats.get(position);
 
-        viewHolder.leftCharacterImageView.setImageResource(kombat.GetResourceLeftCharacter());
-        viewHolder.leftCharacterTextView.setText(kombat.GetLeftCharacter().toString());
-        viewHolder.rightCharacterTextView.setText(kombat.GetRightCharacter().toString());
-        viewHolder.rightCharacterImageView.setImageResource(kombat.GetResourceRightCharacter());
+        viewHolder.leftCharacterImageView.setImageResource(kombat.getResourceLeftCharacter());
+        viewHolder.leftCharacterTextView.setText(kombat.getLeftCharacter().toString());
+        viewHolder.rightCharacterTextView.setText(kombat.getRightCharacter().toString());
+        viewHolder.rightCharacterImageView.setImageResource(kombat.getResourceRightCharacter());
         viewHolder.leftPlayerTextView.setText(kombat.getLeftPlayer().toString());
         viewHolder.rightPlayerTextView.setText(kombat.getRightPlayer().toString());
+        if(isColor) {
+            setColor(viewHolder, kombat, convertView);
+        }
+
         return convertView;
     }
+
+    private void setColor(ViewHolder viewHolder, Kombat kombat, View view) {
+        //String colorLeft, colorRight;
+        if (kombat.getWinnerSide() == Kombat.WINNER_SIDE.OWN || kombat.getWinnerSide() == Kombat.WINNER_SIDE.OPPONENT_LEAVE) {
+            view.setBackgroundColor(Color.parseColor("green"));
+        } else if (kombat.getWinnerSide() == Kombat.WINNER_SIDE.OWN_LEAVE || kombat.getWinnerSide() == Kombat.WINNER_SIDE.OPPONENT) {
+            view.setBackgroundColor(Color.parseColor("red"));
+        }
+        else {
+            view.setBackgroundColor(Color.parseColor("#FFA500"));
+        }
+//        viewHolder.leftPlayerTextView.setBackgroundColor(Color.parseColor(colorLeft));
+//        viewHolder.leftCharacterTextView.setBackgroundColor(Color.parseColor(colorLeft));
+//        viewHolder.rightPlayerTextView.setBackgroundColor(Color.parseColor(colorRight));
+//        viewHolder.rightCharacterTextView.setBackgroundColor(Color.parseColor(colorRight));
+    }
+
+    private void changeVisibleImageView(ViewHolder viewHolder) {
+        if(viewHolder.leftCharacterImageView.getVisibility() == View.VISIBLE) {
+            viewHolder.leftCharacterImageView.setVisibility(View.INVISIBLE);
+            viewHolder.rightCharacterImageView.setVisibility(View.INVISIBLE);
+        }
+        else if(viewHolder.leftCharacterImageView.getVisibility() == View.INVISIBLE) {
+            viewHolder.leftCharacterImageView.setVisibility(View.VISIBLE);
+            viewHolder.rightCharacterImageView.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     private class ViewHolder {
         final ImageView leftCharacterImageView, rightCharacterImageView;

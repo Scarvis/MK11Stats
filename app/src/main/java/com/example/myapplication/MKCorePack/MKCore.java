@@ -2,6 +2,7 @@ package com.example.myapplication.MKCorePack;
 
 import android.content.Context;
 
+import com.example.myapplication.Adapters.DatabaseAdapter;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
@@ -9,14 +10,18 @@ import java.util.List;
 
 public class MKCore {
     private ArrayList<Character> characterList = new ArrayList<>();
-    private String pathToInitializeCharactersList;
-    private DataProvider dataProvider = new DataProvider();
     private ArrayList<Kombat> kombatsList = new ArrayList<>();
+    private DatabaseAdapter databaseAdapter;
     //#TEST
     private Player ownPlayer = new Player("Scarvis", 1453);
 
     public MKCore() {
         initialize();
+    }
+
+    public MKCore(Context context) {
+        initialize();
+        databaseAdapter = new DatabaseAdapter(context);
     }
 
     private void initialize() {
@@ -32,25 +37,37 @@ public class MKCore {
         PlayerStats playerStats = new PlayerStats(
                 0.4,
                 0.4,
-                new Character("Sub Zero", new Variation("Ice"), R.drawable.sub_zero),
+                new Character(2,"Sub Zero", new Variation("Ice"), R.drawable.sub_zero),
                 3
         );
+        ownPlayer.setPlayerStats(playerStats);
+        Player.setCurrentOwnPlayer(ownPlayer);
     }
 
     private void initCharactersList() {
-        Character scorp = new Character("Scorpion", new Variation("Hellfire"), R.drawable.scorpion);
-        Character sub = new Character("Sub Zero", new Variation("Ice"), R.drawable.sub_zero);
+        ArrayList<Variation> arr = new ArrayList<>();
+        arr.add(new Variation(1, "Searing Rage"));
+        arr.add(new Variation(2, "Reborn"));
+        arr.add(new Variation(3, "Burning Specter"));
+        Character scorp = new Character(1,"Scorpion", arr, R.drawable.scorpion, new DLCCharacter());
+        ArrayList<Variation> arr2 = new ArrayList<>();
+        arr2.add(new Variation(1, "Dead of Winter"));
+        arr2.add(new Variation(2, "Thin Ice"));
+        arr2.add(new Variation(3, "Avalanche"));
+        Character sub = new Character(2, "Sub Zero", arr2, R.drawable.sub_zero, new DLCCharacter());
         characterList.add(scorp);
         characterList.add(sub);
-        //characterList = dataProvider.GetCharactersList(pathToInitializeCharactersList);
+        Character.setCharacterArrayList(characterList);
     }
 
     public void initKombatList(Context context) {
-        kombatsList = JSONHelper.importFromJSON(context);
+        //kombatsList = JSONHelper.importFromJSON(context);
     }
 
     public void addNewKombat(Kombat kombat) {
-
+        databaseAdapter.open();
+        databaseAdapter.insert(kombat);
+        databaseAdapter.close();
     }
 
     public void setKombatsList(ArrayList<Kombat> kombatsList) {
@@ -62,16 +79,10 @@ public class MKCore {
     }
 
     public ArrayList<Kombat> getKombatsList() {
+        databaseAdapter.open();
+        kombatsList = databaseAdapter.getKombats();
+        databaseAdapter.close();
         return kombatsList;
-    }
-
-    public boolean setPathToInitializeCharactersList(String path) {
-        if (dataProvider.ValidatePath(path).IsSuccess()) {
-            pathToInitializeCharactersList = path;
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public Player getOwnPlayer() {

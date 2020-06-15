@@ -9,18 +9,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="Your Character"
+        android:text="You"
         android:layout_marginBottom="10dp"
-        android:textSize="16dp"/>
+        android:textSize="16dp"
+        />
     <EditText
         android:id="@+id/leftPlayerEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="Your Nickname"/>
     <EditText
         android:id="@+id/leftPlayerMMREditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginBottom="15dp"
+        android:hint="Your MMR"/>
     <Spinner
         android:id="@+id/leftCharacterSpinner"
         android:layout_width="match_parent"
@@ -39,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="Player on the right"
+        android:text="Opponent"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:textSize="16dp"/>
@@ -47,11 +50,13 @@
         android:id="@+id/rightPlayerEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Opponent Nickname"
         />
     <EditText
         android:id="@+id/rightPlayerMMREditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="Opponent MMR"/>
     <Spinner
         android:id="@+id/rightCharacterSpinner"
         android:layout_width="match_parent"
@@ -66,6 +71,11 @@
         android:textAlignment="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"/>
+    <CheckBox
+        android:id="@+id/winnerSideBufId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Winner"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
@@ -17,14 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityTwo extends AppCompatActivity {
-
-    KombatsListViewModel kombatsListViewModel;
+    private KombatsListViewModel kombatsListViewModel;
+    private KombatAdapter kombatAdapter;
+    private ListView kombatListView;
+    boolean changeVisible = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two);
         initialize();
-
     }
 
     public void initialize() {
@@ -32,25 +34,30 @@ public class ActivityTwo extends AppCompatActivity {
 
         if (arguments != null) {
             kombatsListViewModel = (KombatsListViewModel) arguments.getSerializable(KombatsListViewModel.class.getSimpleName());
+            if(kombatsListViewModel == null) return;
         } else {
             return;
         }
-        ListView kombatListView = findViewById(R.id.DKombatListViewId);
-        KombatAdapter kombatAdapter = new KombatAdapter(this, R.layout.kombat_list_item, kombatsListViewModel.getKombatArrayList());
+        kombatListView = findViewById(R.id.DKombatListViewId);
+        kombatAdapter = new KombatAdapter(this, R.layout.kombat_list_item, kombatsListViewModel.getKombatArrayList());
+        kombatAdapter.setColor(true);
         kombatListView.setAdapter(kombatAdapter);
     }
 
     public void butClick(View view) {
-        ImageView liv = findViewById(R.id.leftCharacterImageView);
-        ImageView riv = findViewById(R.id.rightCharacterImageView);
+//        if (!changeVisible) {
+//            changeVisible = true;
+//            kombatAdapter.setImageVisible(true);
+//        } else {
+//            changeVisible = false;
+//            kombatAdapter.setImageVisible(false);
+//        }
+        goHome();
+    }
 
-        if(liv.getVisibility() == View.VISIBLE) {
-            liv.setVisibility(View.INVISIBLE);
-            riv.setVisibility(View.INVISIBLE);
-        }
-        else if(liv.getVisibility() == View.INVISIBLE){
-            liv.setVisibility(View.VISIBLE);
-            riv.setVisibility(View.VISIBLE);
-        }
+    private void goHome() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 }

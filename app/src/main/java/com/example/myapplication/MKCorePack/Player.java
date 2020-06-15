@@ -9,6 +9,7 @@ public class Player implements Serializable {
     private int mmr;
     private boolean ownPlayer;
     private PlayerStats playerStats = new PlayerStats();
+    private static Player currentOwnPlayer;
 
     public Player() {
         nickName = "unknown";
@@ -24,10 +25,22 @@ public class Player implements Serializable {
         this.nickName = player.nickName;
         this.mmr = player.mmr;
         this.ownPlayer = player.ownPlayer;
+        this.playerStats = player.playerStats;
     }
 
     public void setOwnPlayer() {
         this.ownPlayer = true;
+    }
+
+    public static void setCurrentOwnPlayer(Player curOwnPlayer) {
+        currentOwnPlayer = new Player(curOwnPlayer);
+    }
+
+    public static Player getPlayer(String nickName, int mmr) {
+        if(currentOwnPlayer.getNickName().equals(nickName))
+            return currentOwnPlayer;
+        else
+            return new Player(nickName, mmr);
     }
 
     public String getNickName() {

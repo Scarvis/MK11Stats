@@ -1,6 +1,8 @@
 package com.example.myapplication.ViewModels;
 
 
+import android.content.Context;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.MKCorePack.Character;
@@ -21,8 +23,20 @@ public class MKViewModel extends AppCompatActivity {
         initialize();
     }
 
+    public MKViewModel(Context context) {
+        initialize(context);
+    }
+
     private void initialize() {
         mkCore = new MKCore();
+        initKombatsList();
+        initButtons();
+        initProfileViewModel();
+        initKombatsListViewModel();
+    }
+
+    private void initialize(Context context) {
+        mkCore = new MKCore(context);
         initKombatsList();
         initButtons();
         initProfileViewModel();
@@ -66,13 +80,12 @@ public class MKViewModel extends AppCompatActivity {
 //        }
     }
 
-    public void addNewKombat() {
-
+    public void updateKombatsList() {
+        kombatsListViewModel.setKombatArrayList(mkCore.getKombatsList());
     }
 
-    public void setKombatsList(ArrayList<Kombat> kombatsList) {
-        mkCore.setKombatsList(kombatsList);
-        kombatsListViewModel.setKombatArrayList(kombatsList);
+    public void addNewKombat() {
+
     }
 
     public ArrayList<Character> getCharactersList() {
@@ -90,4 +103,5 @@ public class MKViewModel extends AppCompatActivity {
     public KombatsListViewModel getKombatsListViewModel() {
         return kombatsListViewModel;
     }
+
 }

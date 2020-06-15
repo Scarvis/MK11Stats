@@ -1,5 +1,6 @@
 package com.example.myapplication.ViewModels;
 
+import com.example.myapplication.Adapters.DatabaseAdapter;
 import com.example.myapplication.MKCorePack.Character;
 import com.example.myapplication.MKCorePack.Kombat;
 import com.example.myapplication.MKCorePack.Player;
