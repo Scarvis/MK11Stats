@@ -19,6 +19,10 @@ public class KombatsListViewModel implements Serializable {
         this.kombatArrayList = kombatsListViewModel.kombatArrayList;
     }
 
+    public void addKombat(Kombat kombat) {
+        kombatArrayList.add(kombat);
+    }
+
     public void setKombatArrayList(ArrayList<Kombat> kombatArrayList) {
         this.kombatArrayList = kombatArrayList;
     }

@@ -1,6 +1,8 @@
 package com.example.myapplication.MKCorePack;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Kombat implements Serializable {
     private static int idCounter = 0;
@@ -129,7 +131,6 @@ public class Kombat implements Serializable {
                 default: return SERVER_ERROR;
             }
         }
-
         public static int getIntSide(WINNER_SIDE winner_side) {
             if(winner_side == WINNER_SIDE.OWN) return 1;
             if(winner_side == WINNER_SIDE.OPPONENT) return 2;
@@ -137,6 +138,16 @@ public class Kombat implements Serializable {
             if(winner_side == WINNER_SIDE.OPPONENT_LEAVE) return 4;
             return 0;
         }
-
+        public static int getIdSideByString(String sideOption) {
+            ArrayList<String> options = getValuesSimpleStrings();
+            for (int i = 0; i < options.size(); i++) {
+                if (sideOption.equals(options.get(i)))
+                    return i + 1;
+            }
+            return 0;
+        }
+        public static ArrayList<String> getValuesSimpleStrings() {
+            return new ArrayList<String> (Arrays.asList("OWN", "OPPONENT", "OWN_LEAVE", "OPPONENT_LEAVE", "SERVER_ERROR"));
+        }
     }
 }

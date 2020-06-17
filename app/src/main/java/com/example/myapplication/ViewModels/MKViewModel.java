@@ -30,7 +30,6 @@ public class MKViewModel extends AppCompatActivity {
     private void initialize() {
         mkCore = new MKCore();
         initKombatsList();
-        initButtons();
         initProfileViewModel();
         initKombatsListViewModel();
     }
@@ -38,7 +37,6 @@ public class MKViewModel extends AppCompatActivity {
     private void initialize(Context context) {
         mkCore = new MKCore(context);
         initKombatsList();
-        initButtons();
         initProfileViewModel();
         initKombatsListViewModel();
     }
@@ -64,11 +62,6 @@ public class MKViewModel extends AppCompatActivity {
         kombatsListViewModel = new KombatsListViewModel(mkCore.getKombatsList());
     }
 
-    private void initButtons() {
-
-    }
-
-
     private void initKombatsList() {
 //        try {
 //            ListView kombatListView = findViewById(R.id.KombatListViewId);
@@ -84,16 +77,22 @@ public class MKViewModel extends AppCompatActivity {
         kombatsListViewModel.setKombatArrayList(mkCore.getKombatsList());
     }
 
-    public void addNewKombat() {
+    public void addNewKombat(Kombat kombat) {
+        mkCore.addNewKombat(kombat);
+        kombatsListViewModel.addKombat(kombat);
+    }
 
+    public void setCharactersList(String text) {
+        mkCore.setCharacterList(text);
     }
 
     public ArrayList<Character> getCharactersList() {
         return mkCore.getCharactersList();
     }
 
-    public ArrayList getKombatsList() {
-        return mkCore.getKombatsList();
+    public ArrayList<Kombat> getKombatsList() {
+        updateKombatsList();
+        return kombatsListViewModel.getKombatArrayList();
     }
 
     public ProfileViewModel getProfileViewModel() {

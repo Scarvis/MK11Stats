@@ -28,12 +28,12 @@ public class Player implements Serializable {
         this.playerStats = player.playerStats;
     }
 
-    public void setOwnPlayer() {
-        this.ownPlayer = true;
-    }
-
     public static void setCurrentOwnPlayer(Player curOwnPlayer) {
         currentOwnPlayer = new Player(curOwnPlayer);
+    }
+
+    public static Player getCurrentOwnPlayer() {
+        return currentOwnPlayer;
     }
 
     public static Player getPlayer(String nickName, int mmr) {

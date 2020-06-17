@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.example.myapplication.MKCorePack.Variation;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class activity_add_kombat extends AppCompatActivity {
     private ArrayList<Character> charactersArrayList;
@@ -36,13 +38,12 @@ public class activity_add_kombat extends AppCompatActivity {
     private Spinner leftPlayerCharacterVariationSpinner;
     private Spinner rightPlayerCharacterSpinner;
     private Spinner rightPlayerCharacterVariationSpinner;
-    private CheckBox winnerSideCb;
-    private DatabaseAdapter databaseAdapter;
+    private Spinner winnerSideSelectSpinner;
+    private CheckBox isRankedCheckBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_kombat);
-        databaseAdapter = new DatabaseAdapter(this);
         initializeViews();
         initialize();
     }
@@ -57,11 +58,15 @@ public class activity_add_kombat extends AppCompatActivity {
             return;
         }
         if(charactersArrayList == null || charactersArrayList.size() == 0) return;
+        Collections.sort(charactersArrayList, Character.CharactersNameComparator);
+
         initializeSpinners(charactersArrayList);
+        initializeWinnerSideSpinner();
         editVariationSpinner(charactersArrayList.get(0), (Spinner) findViewById(R.id.leftCharacterVariationSpinner));
         editVariationSpinner(charactersArrayList.get(0), (Spinner) findViewById(R.id.rightCharacterVariationSpinner));
     }
 
+    @SuppressLint("SetTextI18n")
     private void initializeViews() {
         leftPlayerNickEditText = findViewById(R.id.leftPlayerEditText);
         rightPlayerNickEditText = findViewById(R.id.rightPlayerEditText);
@@ -71,7 +76,12 @@ public class activity_add_kombat extends AppCompatActivity {
         leftPlayerCharacterVariationSpinner = findViewById(R.id.leftCharacterVariationSpinner);
         rightPlayerCharacterSpinner = findViewById(R.id.rightCharacterSpinner);
         rightPlayerCharacterVariationSpinner = findViewById(R.id.rightCharacterVariationSpinner);
-        winnerSideCb = findViewById(R.id.winnerSideBufId);
+        winnerSideSelectSpinner = findViewById(R.id.winnerSideSelectSpinner);
+        isRankedCheckBox = findViewById(R.id.isRankedCheckBox);
+
+        Player curPlayer = Player.getCurrentOwnPlayer();
+        leftPlayerNickEditText.setText(curPlayer.getNickName());
+        leftPlayerMMREditText.setText(Integer.toString(curPlayer.getMmr()));
     }
 
     private void initializeSpinners(ArrayList<Character> characters) {
@@ -87,7 +97,6 @@ public class activity_add_kombat extends AppCompatActivity {
         OnItemSelectedListener litemSelectedListener = new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Получаем выбранный объект
                 editVariationSpinner(charactersArrayList.get(position), leftPlayerCharacterVariationSpinner);
                 TextView tv = (TextView) findViewById(R.id.logTextView);
                 tv.setText(Long.toString(id) + " "  + Integer.toString(position));
@@ -101,7 +110,6 @@ public class activity_add_kombat extends AppCompatActivity {
         OnItemSelectedListener ritemSelectedListener = new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Получаем выбранный объект
                 editVariationSpinner(charactersArrayList.get(position), rightPlayerCharacterVariationSpinner);
                 TextView tv = (TextView) findViewById(R.id.logTextView);
                 tv.setText(Long.toString(id) + " "  + Integer.toString(position));
@@ -116,8 +124,11 @@ public class activity_add_kombat extends AppCompatActivity {
         rightPlayerCharacterSpinner.setOnItemSelectedListener(ritemSelectedListener);
     }
 
-    private void initializeSpinnerListeners() {
-
+    private void initializeWinnerSideSpinner() {
+        ArrayList<String> winnerValues = Kombat.WINNER_SIDE.getValuesSimpleStrings();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, winnerValues);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        winnerSideSelectSpinner.setAdapter(adapter);
     }
 
     private void editVariationSpinner(Character character, Spinner spinner) {
@@ -144,30 +155,32 @@ public class activity_add_kombat extends AppCompatActivity {
         Character rightCharacter = Character.getCharacterById(charactersArrayList.get(rightPlayerCharacterSpinner.getSelectedItemPosition()).getId());
         rightCharacter.setVariation(rightPlayerCharacterVariationSpinner.getSelectedItemPosition() + 1);
         Player rightPlayer = Player.getPlayer(rightPlayerNickEditText.getText().toString(), rightPlayerMMR);
-        int isRanked = 0;
         int kombatLeagueSeason = 0;
-        int winnerSide = 1;
-        if(!winnerSideCb.isChecked())
-            winnerSide = 2;
+        boolean isRanked = isRankedCheckBox.isEnabled();
+        if (isRanked) kombatLeagueSeason = 10;
+        int winnerSide = winnerSideSelectSpinner.getSelectedItemPosition() + 1;
         Kombat kombat = new Kombat(
                 leftCharacter,
                 rightCharacter,
                 leftPlayer,
                 rightPlayer,
-                (isRanked == 1),
+                isRanked,
                 kombatLeagueSeason,
                 winnerSide
         );
-
-        databaseAdapter.open();
-        databaseAdapter.insert(kombat);
-        databaseAdapter.close();
-        goHome();
+        goHomeWithKombat(kombat);
     }
 
     private void goHome() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
+
+    private void goHomeWithKombat(Kombat kombat) {
+        Intent intent = new Intent(this, MainActivity.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra(Kombat.class.getSimpleName(), kombat);
         startActivity(intent);
     }
 }

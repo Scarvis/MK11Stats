@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 
 public class Character implements Serializable {
@@ -16,7 +17,7 @@ public class Character implements Serializable {
     private DLCCharacter dlc = new DLCCharacter();
 
 
-    private static ArrayList<Character> characterArrayList;
+    private static ArrayList<Character> characterArrayList = new ArrayList<Character>();
 
     public Character() {
         this.id = 0;
@@ -70,6 +71,9 @@ public class Character implements Serializable {
         }
         variation = new Variation();
     }
+    public void setCharacterImageResource(int characterImageResource){
+        this.characterImageResource = characterImageResource;
+    }
 
     public static void setCharacterArrayList(ArrayList<Character> characters) {
         characterArrayList = characters;
@@ -114,6 +118,21 @@ public class Character implements Serializable {
     public DLCCharacter getDlc() {
         return dlc;
     }
+
+    public static Comparator<Character> CharactersIdComparator = new Comparator<Character>() {
+
+        public int compare(Character character1, Character character2) {
+            Integer id1 = character1.getId();
+            Integer id2 = character2.getId();
+            return id1.compareTo(id2);
+        }};
+    public static Comparator<Character> CharactersNameComparator = new Comparator<Character>() {
+
+        public int compare(Character character1, Character character2) {
+            String id1 = character1.getName();
+            String id2 = character2.getName();
+            return id1.compareTo(id2);
+        }};
 
     @NonNull
     @Override
