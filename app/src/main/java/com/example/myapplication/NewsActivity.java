@@ -3,7 +3,6 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,6 @@ public class NewsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private EditText mEditText;
     private Button mFetchFeedButton;
-    private SwipeRefreshLayout mSwipeLayout;
     private TextView mFeedTitleTextView;
     private TextView mFeedLinkTextView;
     private TextView mFeedDescriptionTextView;

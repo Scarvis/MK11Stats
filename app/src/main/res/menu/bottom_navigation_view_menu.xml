@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-    <item
-        android:id="@+id/bottom_navigation_item_logs"
-        android:title="kombats" />
-
-    <item
-        android:id="@+id/bottom_navigation_item_progress"
-        android:title="add new kombat" />
-
-    <item
-        android:id="@+id/bottom_navigation_item_profile"
-        android:title="profile"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/bottom_navigation_item_news"
-        android:title="news"/>
+        android:enabled="true"
+        android:title="News"
+        android:icon="@drawable/ic_home_black_24dp"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/bottom_navigation_item_profile"
+        android:enabled="true"
+        android:title="Profile"
+        android:icon="@drawable/ic_person_outline_black_24dp"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/bottom_navigation_item_add_new_kombat"
+        android:enabled="true"
+        android:icon="@drawable/ic_add_circle_outline_black_24dp"
+        android:title="Add new kombat"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/bottom_navigation_item_kombats"
+        android:enabled="true"
+        android:icon="@drawable/ic_kombats_outline_black"
+        android:title="Kombats"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/bottom_navigation_item_settings"
+        android:enabled="true"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        app:showAsAction="ifRoom"/>
 
 </menu>

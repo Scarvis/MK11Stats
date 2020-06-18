@@ -98,8 +98,6 @@ public class activity_add_kombat extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 editVariationSpinner(charactersArrayList.get(position), leftPlayerCharacterVariationSpinner);
-                TextView tv = (TextView) findViewById(R.id.logTextView);
-                tv.setText(Long.toString(id) + " "  + Integer.toString(position));
             }
 
             @Override
@@ -111,8 +109,6 @@ public class activity_add_kombat extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 editVariationSpinner(charactersArrayList.get(position), rightPlayerCharacterVariationSpinner);
-                TextView tv = (TextView) findViewById(R.id.logTextView);
-                tv.setText(Long.toString(id) + " "  + Integer.toString(position));
             }
 
             @Override

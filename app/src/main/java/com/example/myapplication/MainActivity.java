@@ -26,18 +26,23 @@ import android.view.View;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.myapplication.Adapters.DatabaseAdapter;
 import com.example.myapplication.Adapters.KombatAdapter;
 import com.example.myapplication.MKCorePack.DatabaseHelper;
 import com.example.myapplication.MKCorePack.JSONHelper;
 import com.example.myapplication.MKCorePack.Kombat;
+import com.example.myapplication.MKCorePack.Player;
 import com.example.myapplication.MKCorePack.Variation;
 import com.example.myapplication.MKCorePack.Character;
 import com.example.myapplication.ViewModels.HomeFragment;
+import com.example.myapplication.ViewModels.KombatsFragment;
 import com.example.myapplication.ViewModels.KombatsListViewModel;
 import com.example.myapplication.ViewModels.MKViewModel;
+import com.example.myapplication.ViewModels.ProfileFragment;
 import com.example.myapplication.ViewModels.ProfileViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 //import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
@@ -50,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private MKViewModel mkViewModel;
     private static final int REQUEST_PERMISSION_WRITE = 1001;
     private ArrayList<Kombat> kombatArrayList = new ArrayList<Kombat>();
+    private Toolbar toolbar;
     private KombatAdapter arrayAdapter;
     private ListView testV;
     //#Test
@@ -64,10 +70,17 @@ public class MainActivity extends AppCompatActivity {
 
         mkViewModel = new MKViewModel(this);
         Initialize();
-        testV = findViewById(R.id.KombatListViewId);
+        //testV = findViewById(R.id.KombatListViewId);
         //databaseHelper = new DatabaseHelper(getApplicationContext());
         openText(testV);
-
+        toolbar = findViewById(R.id.toolbarId);
+        toolbar.setTitle("News");
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+                    new HomeFragment()).commit();
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -79,41 +92,78 @@ public class MainActivity extends AppCompatActivity {
 //        Cursor cursor = db.rawQuery("select * from " + DatabaseHelper.TABLE, null);
 //        Log.d("work pls", "onResume: " + cursor.getCount());
         addNewKombat();
-        ArrayList<Kombat> kombats = mkViewModel.getKombatsList();
-        arrayAdapter = new KombatAdapter(this, R.layout.kombat_list_item, kombats);
-        testV.setAdapter(arrayAdapter);
+//        ArrayList<Kombat> kombats = mkViewModel.getKombatsList();
+//        arrayAdapter = new KombatAdapter(this, R.layout.kombat_list_item, kombats);
+//        testV.setAdapter(arrayAdapter);
     }
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
+                    boolean isAddKombat = false;
+                    switch (item.getItemId()) {
+                        case R.id.bottom_navigation_item_news:
+                            selectedFragment = new HomeFragment();
+                            toolbar.setTitle("Home");
+                            break;
+                        case R.id.bottom_navigation_item_kombats:
+                            selectedFragment = new KombatsFragment(mkViewModel.getKombatsList());
+                            toolbar.setTitle("Kombats");
+                            break;
+                        case R.id.bottom_navigation_item_profile:
+                            selectedFragment = new ProfileFragment(Player.getCurrentOwnPlayer());
+                            toolbar.setTitle("Profile");
+                            break;
+                        case R.id.bottom_navigation_item_add_new_kombat:
+                            isAddKombat = true;
+                            break;
+                    }
+                    if (isAddKombat) {
+                        addKombat();
+                        return false;
+                    }
+                    if (selectedFragment == null) return false;
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+                            selectedFragment).commit();
+                    return true;
+                }
+            };
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bottom_navigation_view_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        TextView tv = findViewById(R.id.KombatTVid);
-        tv.setText(item.getTitle());
-        if (item.getTitle().toString().equals("kombats")) {
-            Intent intent = new Intent(this, ActivityTwo.class);
-            intent.putExtra(KombatsListViewModel.class.getSimpleName(), mkViewModel.getKombatsListViewModel());
-            startActivity(intent);
-        } else if (item.getTitle().toString().equals("add new kombat")) {
-            Intent intent = new Intent(this, activity_add_kombat.class);
-            intent.putExtra(ArrayList.class.getSimpleName(), mkViewModel.getCharactersList());
-            startActivity(intent);
-        } else if (item.getTitle().toString().equals("profile")) {
-            Intent intent = new Intent(this, ProfileActivity.class);
-            intent.putExtra(ProfileViewModel.class.getSimpleName(), mkViewModel.getProfileViewModel());
-            intent.putExtra(KombatsListViewModel.class.getSimpleName(), mkViewModel.getKombatsListViewModel());
-            startActivity(intent);
-        } else if (item.getTitle().toString().equals("news")) {
-//            Intent intent = new Intent(this, NewsActivity.class);
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.bottom_navigation_view_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        TextView tv = findViewById(R.id.KombatTVid);
+//        tv.setText(item.getTitle());
+//        if (item.getTitle().toString().equals("kombats")) {
+//            Intent intent = new Intent(this, ActivityTwo.class);
+//            intent.putExtra(KombatsListViewModel.class.getSimpleName(), mkViewModel.getKombatsListViewModel());
 //            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
+//        } else if (item.getTitle().toString().equals("add new kombat")) {
+//            Intent intent = new Intent(this, activity_add_kombat.class);
+//            intent.putExtra(ArrayList.class.getSimpleName(), mkViewModel.getCharactersList());
+//            startActivity(intent);
+//        } else if (item.getTitle().toString().equals("profile")) {
+//            Intent intent = new Intent(this, ProfileActivity.class);
+//            intent.putExtra(ProfileViewModel.class.getSimpleName(), mkViewModel.getProfileViewModel());
+//            intent.putExtra(KombatsListViewModel.class.getSimpleName(), mkViewModel.getKombatsListViewModel());
+//            startActivity(intent);
+//        } else if (item.getTitle().toString().equals("news")) {
+////            Intent intent = new Intent(this, NewsActivity.class);
+////            startActivity(intent);
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+    private void addKombat() {
+        Intent intent = new Intent(this, activity_add_kombat.class);
+        intent.putExtra(ArrayList.class.getSimpleName(), mkViewModel.getCharactersList());
+        startActivity(intent);
     }
-
 
     public void addNewKombat() {
         Bundle arguments = getIntent().getExtras();
