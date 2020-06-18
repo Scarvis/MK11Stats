@@ -4,15 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="12dp"
-    android:overScrollMode="ifContentScrolls">
+    android:padding="12dp">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="You"
         android:layout_marginBottom="10dp"
-        android:textSize="16dp"
+        android:textSize="16sp"
         />
     <EditText
         android:id="@+id/leftPlayerEditText"
@@ -25,20 +24,44 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:hint="Your MMR"/>
-    <Spinner
-        android:id="@+id/leftCharacterSpinner"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"/>
-    <Spinner
-        android:id="@+id/leftCharacterVariationSpinner"
+        android:layout_marginBottom="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Character"
+            android:layout_margin="5dp"
+            android:textSize="16sp"/>
+        <Spinner
+            android:id="@+id/leftCharacterSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+            >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Variation"
+            android:layout_margin="5dp"
+            android:textSize="16sp"/>
+        <Spinner
+            android:id="@+id/leftCharacterVariationSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            />
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,7 +69,7 @@
         android:text="Opponent"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:textSize="16dp"/>
+        android:textSize="16sp"/>
     <EditText
         android:id="@+id/rightPlayerEditText"
         android:layout_width="match_parent"
@@ -58,32 +81,69 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Opponent MMR"/>
-    <Spinner
-        android:id="@+id/rightCharacterSpinner"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"/>
-    <Spinner
-        android:id="@+id/rightCharacterVariationSpinner"
+        android:layout_marginBottom="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Character"
+            android:layout_margin="5dp"
+            android:textSize="16sp"/>
+        <Spinner
+            android:id="@+id/rightCharacterSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
-    <Spinner
-        android:id="@+id/winnerSideSelectSpinner"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Variation"
+            android:layout_margin="5dp"/>
+        <Spinner
+            android:id="@+id/rightCharacterVariationSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+           />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Winner"
+            android:layout_margin="5dp"/>
+        <Spinner
+            android:id="@+id/winnerSideSelectSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            />
+    </LinearLayout>
     <CheckBox
         android:id="@+id/isRankedCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kombat league match"/>
+        android:text="Kombat league match"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {
-    ProfileViewModel profileViewModel;
-    KombatsListViewModel kombatsListViewModel;
+    private ProfileViewModel profileViewModel;
+    private KombatsListViewModel kombatsListViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +34,10 @@ public class ProfileActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra(KombatsListViewModel.class.getSimpleName(), kombatsListViewModel);
         startActivity(intent);
+    }
+
+    public void cancel(View view) {
+        goHome();
     }
 
     private void initialize() {
@@ -59,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
         Button gamesHistoryButton = findViewById(R.id.gamesHistoryButton);
         ListView listView = findViewById(R.id.kombatLeagueSeasonsListView);
 
-        Player ownPlayer = profileViewModel.getOnwPlayer();
+        Player ownPlayer = profileViewModel.getOwnPlayer();
 
         tvNick.setText(ownPlayer.getNickName());
         tvTotalGames.setText(Integer.toString(ownPlayer.getTotalGames()));

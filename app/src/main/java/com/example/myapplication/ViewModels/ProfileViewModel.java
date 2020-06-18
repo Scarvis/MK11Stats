@@ -15,7 +15,7 @@ public class ProfileViewModel implements Serializable {
     private double rankedWinRate;
     private Character favoriteCharacter;
     private ArrayList<Kombat> kombatList;
-    private Player onwPlayer;
+    private Player ownPlayer;
 
     public ProfileViewModel(ProfileViewModel profileViewModel) {
         this.totalGames = profileViewModel.totalGames;
@@ -23,7 +23,7 @@ public class ProfileViewModel implements Serializable {
         this.rankedWinRate = profileViewModel.rankedWinRate;
         this.favoriteCharacter = profileViewModel.favoriteCharacter;
         this.kombatList = profileViewModel.kombatList;
-        this.onwPlayer = profileViewModel.onwPlayer;
+        this.ownPlayer = profileViewModel.ownPlayer;
     }
 
     public ProfileViewModel(int totalGames, double winRate, double rankedWinRate, Character favoriteCharacter, ArrayList kombatList, Player ownPlayer) {
@@ -32,11 +32,11 @@ public class ProfileViewModel implements Serializable {
         this.rankedWinRate = rankedWinRate;
         this.favoriteCharacter = favoriteCharacter;
         this.kombatList = kombatList;
-        this.onwPlayer = ownPlayer;
+        this.ownPlayer = ownPlayer;
     }
 
-    public Player getOnwPlayer() {
-        return onwPlayer;
+    public Player getOwnPlayer() {
+        return ownPlayer;
     }
 
     public int getTotalGames() {

@@ -39,6 +39,7 @@ public class MKViewModel extends AppCompatActivity {
         initKombatsList();
         initProfileViewModel();
         initKombatsListViewModel();
+
     }
 
     private void initProfileViewModel() {

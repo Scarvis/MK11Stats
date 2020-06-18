@@ -95,6 +95,12 @@
                 android:text="N/A"/>
         </LinearLayout>
         <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="cancel"
+            android:onClick="cancel"
+            android:textAlignment="viewStart"/>
+        <Button
             android:id="@+id/gamesHistoryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

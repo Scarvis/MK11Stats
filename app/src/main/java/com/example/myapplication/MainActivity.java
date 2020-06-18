@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         testV = findViewById(R.id.KombatListViewId);
         //databaseHelper = new DatabaseHelper(getApplicationContext());
         openText(testV);
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     private void Initialize() {
     }
     private File getExternalPath() {
-        return(new File(Environment.getExternalStorageDirectory(), "charback.json"));
+        return(new File(Environment.getExternalStorageDirectory(), "characters.json"));
     }
     public void openText(View view){
         if(downloadCharacters)return;

@@ -29,8 +29,8 @@ public class MKCore {
         //pathToInitializeCharactersList = "";
         //InitKombatList();
         initCharactersList();
-        //ownPlayer.setOwnPlayer();
         initPlayer();
+
     }
 
     private void initPlayer() {
@@ -73,7 +73,7 @@ public class MKCore {
         ArrayList<Character> charArrayList = JSONHelper.importCharactersFromJSON(text);
         if (charArrayList == null) return;
         for (Character character : charArrayList) {
-            Log.d("CHARACTERES", character.getName() + " " + character.getId());
+            Log.d("CHARACTERS", character.getName() + " " + character.getId());
             if (character.getId() == 1)
                 character.setCharacterImageResource(R.drawable.scorpion);
             if (character.getId() == 2)

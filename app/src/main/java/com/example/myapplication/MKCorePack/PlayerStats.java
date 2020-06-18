@@ -9,9 +9,8 @@ import java.util.List;
 public class PlayerStats implements Serializable {
     private double rankedWinRate;
     private double winRate;
-    private Character favoriteCharacter = new Character("Scorpion", new Variation("Hellfire"), R.drawable.scorpion);
+    private Character favoriteCharacter = new Character();
     private int totalGames;
-    //HashMap<Character, Integer> charactersStats;
 
     public PlayerStats() {
 

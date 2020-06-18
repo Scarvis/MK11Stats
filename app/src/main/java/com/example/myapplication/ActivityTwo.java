@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -42,16 +43,11 @@ public class ActivityTwo extends AppCompatActivity {
         kombatAdapter = new KombatAdapter(this, R.layout.kombat_list_item, kombatsListViewModel.getKombatArrayList());
         kombatAdapter.setColor(true);
         kombatListView.setAdapter(kombatAdapter);
+
+
     }
 
     public void butClick(View view) {
-//        if (!changeVisible) {
-//            changeVisible = true;
-//            kombatAdapter.setImageVisible(true);
-//        } else {
-//            changeVisible = false;
-//            kombatAdapter.setImageVisible(false);
-//        }
         goHome();
     }
 
