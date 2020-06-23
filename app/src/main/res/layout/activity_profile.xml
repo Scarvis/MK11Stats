@@ -1,121 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:background="@color/colorBlack"
+    >
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/profile_playerNicknameRL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nickname:"
-                android:layout_marginRight="15dp"/>
-            <TextView
-                android:id="@+id/nicknameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Scarvis"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Current MMR:"
-                android:layout_marginRight="15dp"/>
-            <TextView
-                android:id="@+id/currentMMRTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1234"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total games:"
-                android:layout_marginRight="15dp"/>
-            <TextView
-                android:id="@+id/totalGamesTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="123"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Your favorite character:"
-                android:layout_marginRight="15dp"/>
-            <TextView
-                android:id="@+id/favoriteCharacterTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Scorpion"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="WinRate:"
-                android:layout_marginRight="15dp"/>
-            <TextView
-                android:id="@+id/winRateTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="N/A"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ranked WinRate:"
-                android:layout_marginRight="15dp"/>
-            <TextView
-                android:id="@+id/winRateRankedTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="N/A"/>
-        </LinearLayout>
-        <Button
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/profile_nicknameLabel"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="cancel"
-            android:onClick="cancel"
-            android:textAlignment="viewStart"/>
-        <Button
-            android:id="@+id/gamesHistoryButton"
-            android:layout_width="match_parent"
+            android:text="Nickname: "
+            android:layout_marginEnd="15dp"
+            android:textColor="@color/colorWhite"
+            />
+        <TextView
+            android:id="@+id/nicknameTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="N games"
-            android:textAlignment="viewStart"
-            android:onClick="gamesStats"/>
-        <ListView
-            android:id="@+id/kombatLeagueSeasonsListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_toRightOf="@+id/profile_nicknameLabel"
+            android:text="Scarvis"
+            android:textColor="@color/colorWhite"
+            />
+    </RelativeLayout>
 
-
-    <TextView
-        android:id="@+id/logTextView"
+    <RelativeLayout
+        android:id="@+id/profile_playerMMRRL"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_playerNicknameRL">
+        <TextView
+            android:id="@+id/profile_playerMMRLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current MMR:"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/colorWhite"/>
+        <TextView
+            android:id="@+id/profile_playerMMRTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/profile_playerMMRLabel"
+            android:text="1234"
+            android:textColor="@color/colorWhite"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/profile_totalGamesRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_playerMMRRL">
+        <TextView
+            android:id="@+id/profile_totalGamesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total games:"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/colorWhite"/>
+        <TextView
+            android:id="@+id/profile_totalGamesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123"
+            android:textColor="@color/colorWhite"
+            android:layout_toRightOf="@+id/profile_totalGamesLabel"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/profile_favoriteCharacterRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_totalGamesRL">
+        <TextView
+            android:id="@+id/profile_favoriteCharacterLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:text="Your favorite character:"
+            android:layout_marginRight="15dp"/>
+        <TextView
+            android:id="@+id/profile_favoriteCharacterTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:text="Scorpion"
+            android:layout_toRightOf="@+id/profile_favoriteCharacterLabel"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/profile_winRateRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_favoriteCharacterRL">
+        <TextView
+            android:id="@+id/profile_winRateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:text="WinRate:"
+            android:layout_marginRight="15dp"/>
+        <TextView
+            android:id="@+id/profile_winRateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:text="N/A"
+            android:layout_toRightOf="@+id/profile_winRateLabel"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/profile_winRateRankedRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_winRateRL">
+        <TextView
+            android:id="@+id/profile_winRateRankedLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:text="Ranked WinRate:"
+            android:layout_marginRight="15dp"/>
+        <TextView
+            android:id="@+id/profile_winRateRankedTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:text="N/A"
+            android:layout_toRightOf="@+id/profile_winRateRankedLabel"/>
+    </RelativeLayout>
+    <Button
+        android:id="@+id/profile_totalGamesStatsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="All games"
+        android:textColor="@color/colorWhite"
+        android:textAlignment="viewStart"
+        android:layout_below="@+id/profile_winRateRankedRL"/>
+    <Button
+        android:id="@+id/profile_rankedGamesStatsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ranked games"
+        android:textColor="@color/colorWhite"
+        android:textAlignment="viewStart"
+        android:layout_below="@id/profile_totalGamesStatsButton"
+        />
+    <Button
+        android:id="@+id/profile_casualGamesStatsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Casual games"
+        android:textColor="@color/colorWhite"
+        android:textAlignment="viewStart"
+        android:layout_below="@+id/profile_rankedGamesStatsButton"
+        />
+    <ListView
+        android:id="@+id/profile_charactersStatsListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_casualGamesStatsButton"/>
+
+</RelativeLayout>

@@ -8,10 +8,10 @@
         android:icon="@drawable/ic_home_black_24dp"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/bottom_navigation_item_profile"
+        android:id="@+id/bottom_navigation_item_kombats"
         android:enabled="true"
-        android:title="Profile"
-        android:icon="@drawable/ic_person_outline_black_24dp"
+        android:icon="@drawable/ic_kombats_outline_black"
+        android:title="Kombats"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/bottom_navigation_item_add_new_kombat"
@@ -20,10 +20,10 @@
         android:title="Add new kombat"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/bottom_navigation_item_kombats"
+        android:id="@+id/bottom_navigation_item_profile"
         android:enabled="true"
-        android:icon="@drawable/ic_kombats_outline_black"
-        android:title="Kombats"
+        android:title="Profile"
+        android:icon="@drawable/ic_person_outline_black_24dp"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/bottom_navigation_item_settings"

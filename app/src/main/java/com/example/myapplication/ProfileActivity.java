@@ -55,13 +55,15 @@ public class ProfileActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void initializeFields() {
         TextView tvNick = findViewById(R.id.nicknameTextView);
-        TextView tvTotalGames = findViewById(R.id.totalGamesTextView);
-        TextView tvCurMMR = findViewById(R.id.currentMMRTextView);
-        TextView tvFavChar = findViewById(R.id.favoriteCharacterTextView);
-        TextView tvWR = findViewById(R.id.winRateTextView);
-        TextView tvRankedWR = findViewById(R.id.winRateRankedTextView);
-        Button gamesHistoryButton = findViewById(R.id.gamesHistoryButton);
-        ListView listView = findViewById(R.id.kombatLeagueSeasonsListView);
+        TextView tvTotalGames = findViewById(R.id.profile_totalGamesTextView);
+        TextView tvCurMMR = findViewById(R.id.profile_playerMMRTextView);
+        TextView tvFavChar = findViewById(R.id.profile_favoriteCharacterTextView);
+        TextView tvWR = findViewById(R.id.profile_winRateTextView);
+        TextView tvRankedWR = findViewById(R.id.profile_winRateRankedTextView);
+        Button totalGamesButton = findViewById(R.id.profile_totalGamesStatsButton);
+        Button totalRankedGamesButton = findViewById(R.id.profile_rankedGamesStatsButton);
+        Button totalCasualGamesButton = findViewById(R.id.profile_casualGamesStatsButton);
+        ListView charactersStatsListView = findViewById(R.id.profile_charactersStatsListView);
 
         Player ownPlayer = profileViewModel.getOwnPlayer();
 
@@ -71,10 +73,6 @@ public class ProfileActivity extends AppCompatActivity {
         tvFavChar.setText(ownPlayer.getFavoriteCharacter().getName());
         tvWR.setText(Double.toString(ownPlayer.getWinRate()));
         tvRankedWR.setText(Double.toString(ownPlayer.getRankedWinRate()));
-        gamesHistoryButton.setText(kombatsListViewModel.getCountKombats() + " Kombats");
-
-        KombatAdapter kombatAdapter = new KombatAdapter(this, R.layout.kombat_list_item, kombatsListViewModel.getKombatArrayList());
-        listView.setAdapter(kombatAdapter);
     }
 
     private void goHome() {

@@ -79,6 +79,10 @@ public class Character implements Serializable {
         characterArrayList = characters;
     }
 
+    public static ArrayList<Character> getCharacterArrayList() {
+        return characterArrayList;
+    }
+
     public static Character getCharacterById(int id) {
         for (int i = 0; i < characterArrayList.size(); i++) {
             if (characterArrayList.get(i).getId() == id)

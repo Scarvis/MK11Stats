@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack"
+    >
+
+    <RelativeLayout
+        android:id="@+id/charactersStatsInfo_charactersStatsInfoRL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+        <RelativeLayout
+            android:id="@+id/charactersStatsInfo_charactersStatsInfoImageRL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/charactersStatsInfo_charactersStatsInfoImageView"
+                android:layout_width="105dp"
+                android:layout_height="125dp"
+                android:src="@drawable/scorpion"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/charactersStatsInfo_charactersStatsInfoTextBlocks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGray"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/charactersStatsInfo_charactersStatsInfoImageRL"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total games: "
+                        />
+                    <TextView
+                        android:id="@+id/charactersStatsInfo_charactersStatsInfoTotalGamesTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="213"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stats(W/L/D): "/>
+                    <TextView
+                        android:id="@+id/charactersStatsInfo_charactersStatsInfoTotalGamesStatsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Ranked games: "
+                        />
+                    <TextView
+                        android:id="@+id/charactersStatsInfo_charactersStatsInfoTotalRankedGamesTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="213"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ranked stats(W/L/D): "
+                        />
+                    <TextView
+                        android:id="@+id/charactersStatsInfo_charactersStatsInfoTotalRankedGamesStatsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="213"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/charactersStatsInfo_charactersStatsListRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_below="@+id/charactersStatsInfo_charactersStatsInfoRL">
+        <ListView
+            android:id="@+id/charactersStatsInfo_charactersStatsListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</RelativeLayout>

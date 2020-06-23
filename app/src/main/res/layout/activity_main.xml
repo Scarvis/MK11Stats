@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
 
-        android:background="@color/colorPrimaryDark"
+
+        android:background="@color/colorBlack"
         app:menu="@menu/bottom_navigation_view_menu"
         style="@style/Widget.Design.BottomNavigationView"
         app:itemIconTint="@drawable/nav_item_color_state"

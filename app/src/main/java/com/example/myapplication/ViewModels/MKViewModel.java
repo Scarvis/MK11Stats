@@ -96,6 +96,10 @@ public class MKViewModel extends AppCompatActivity {
         return kombatsListViewModel.getKombatArrayList();
     }
 
+    public Player getPlayer() {
+        return mkCore.getOwnPlayer();
+    }
+
     public ProfileViewModel getProfileViewModel() {
         return profileViewModel;
     }

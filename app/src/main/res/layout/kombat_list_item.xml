@@ -24,17 +24,20 @@
                 android:id="@+id/leftPlayerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorTextWhite"
                 android:text="left" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:textColor="@color/colorTextWhite"
                 android:text="VS" />
             <TextView
                 android:id="@+id/rightPlayerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorTextWhite"
                 android:text="right" />
         </LinearLayout>
         <LinearLayout
@@ -46,6 +49,7 @@
                 android:id="@+id/leftCharacterTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorTextWhite"
                 android:text="Название" />
 
             <TextView
@@ -53,12 +57,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:textColor="@color/colorTextWhite"
                 android:text="VS" />
 
             <TextView
                 android:id="@+id/rightCharacterTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorTextWhite"
                 android:text="Столица" />
 
         </LinearLayout>

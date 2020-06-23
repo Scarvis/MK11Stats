@@ -12,7 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.Adapters.CharacterAdapter;
 import com.example.myapplication.Adapters.KombatAdapter;
+import com.example.myapplication.MKCorePack.Character;
 import com.example.myapplication.MKCorePack.Player;
 import com.example.myapplication.R;
 
@@ -33,20 +35,26 @@ public class ProfileFragment extends Fragment {
     @SuppressLint("SetTextI18n")
     private void initializeFields(View view) {
         TextView tvNick = view.findViewById(R.id.nicknameTextView);
-        TextView tvTotalGames = view.findViewById(R.id.totalGamesTextView);
-        TextView tvCurMMR = view.findViewById(R.id.currentMMRTextView);
-        TextView tvFavChar = view.findViewById(R.id.favoriteCharacterTextView);
-        TextView tvWR = view.findViewById(R.id.winRateTextView);
-        TextView tvRankedWR = view.findViewById(R.id.winRateRankedTextView);
-        Button gamesHistoryButton = view.findViewById(R.id.gamesHistoryButton);
-        ListView listView = view.findViewById(R.id.kombatLeagueSeasonsListView);
+        TextView tvTotalGames = view.findViewById(R.id.profile_totalGamesTextView);
+        TextView tvCurMMR = view.findViewById(R.id.profile_playerMMRTextView);
+        TextView tvFavChar = view.findViewById(R.id.profile_favoriteCharacterTextView);
+        TextView tvWR = view.findViewById(R.id.profile_winRateTextView);
+        TextView tvRankedWR = view.findViewById(R.id.profile_winRateRankedTextView);
+        Button totalGamesButton = view.findViewById(R.id.profile_totalGamesStatsButton);
+        Button totalRankedGamesButton = view.findViewById(R.id.profile_rankedGamesStatsButton);
+        Button totalCasualGamesButton = view.findViewById(R.id.profile_casualGamesStatsButton);
+        ListView charactersStatsListView = view.findViewById(R.id.profile_charactersStatsListView);
 
         tvNick.setText(player.getNickName());
         tvTotalGames.setText(Integer.toString(player.getTotalGames()));
         tvCurMMR.setText(Integer.toString(player.getMmr()));
         tvFavChar.setText(player.getFavoriteCharacter().getName());
-        tvWR.setText(Double.toString(player.getWinRate()));
-        tvRankedWR.setText(Double.toString(player.getRankedWinRate()));
-        //gamesHistoryButton.setText(kombatsListViewModel.getCountKombats() + " Kombats");
+        tvWR.setText(player.getWinRateString());
+        tvRankedWR.setText(player.getRankedWinRateString());
+
+        CharacterAdapter characterAdapter = new CharacterAdapter(
+                view.getContext(), R.layout.character_stats_list_item, Character.getCharacterArrayList(),
+                new CharacterAdapter.CharacterStats(player));
+        charactersStatsListView.setAdapter(characterAdapter);
     }
 }

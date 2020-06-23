@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
@@ -42,6 +43,7 @@ import com.example.myapplication.ViewModels.KombatsListViewModel;
 import com.example.myapplication.ViewModels.MKViewModel;
 import com.example.myapplication.ViewModels.ProfileFragment;
 import com.example.myapplication.ViewModels.ProfileViewModel;
+import com.example.myapplication.ViewModels.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 //import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -81,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
                     new HomeFragment()).commit();
         }
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorBlack)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series
+            getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.statusBar)); //status bar or the time bar at the top
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -105,18 +111,22 @@ public class MainActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.bottom_navigation_item_news:
                             selectedFragment = new HomeFragment();
-                            toolbar.setTitle("Home");
+                            toolbar.setTitle("News");
                             break;
                         case R.id.bottom_navigation_item_kombats:
                             selectedFragment = new KombatsFragment(mkViewModel.getKombatsList());
                             toolbar.setTitle("Kombats");
                             break;
-                        case R.id.bottom_navigation_item_profile:
-                            selectedFragment = new ProfileFragment(Player.getCurrentOwnPlayer());
-                            toolbar.setTitle("Profile");
-                            break;
                         case R.id.bottom_navigation_item_add_new_kombat:
                             isAddKombat = true;
+                            break;
+                        case R.id.bottom_navigation_item_profile:
+                            selectedFragment = new ProfileFragment(mkViewModel.getPlayer());
+                            toolbar.setTitle("Profile");
+                            break;
+                        case R.id.bottom_navigation_item_settings:
+                            selectedFragment = new SettingsFragment(mkViewModel.getPlayer());
+                            toolbar.setTitle("Settings");
                             break;
                     }
                     if (isAddKombat) {

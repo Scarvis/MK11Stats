@@ -3,6 +3,8 @@ package com.example.myapplication.MKCorePack;
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Player implements Serializable {
     private String nickName;
@@ -28,6 +30,14 @@ public class Player implements Serializable {
         this.playerStats = player.playerStats;
     }
 
+    private double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(Double.toString(value));
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+
     public static void setCurrentOwnPlayer(Player curOwnPlayer) {
         currentOwnPlayer = new Player(curOwnPlayer);
     }
@@ -51,10 +61,6 @@ public class Player implements Serializable {
         return this.mmr;
     }
 
-    public boolean getOwnPlayer() {
-        return this.ownPlayer;
-    }
-
     public PlayerStats getPlayerStats() {
         return playerStats;
     }
@@ -63,24 +69,71 @@ public class Player implements Serializable {
         return playerStats.getRankedWinRate();
     }
 
+    public String getRankedWinRateString() {
+        double wr = round(getRankedWinRate() * 100, 4);
+        return wr + " %";
+    }
+
     public double getWinRate() {
         return playerStats.getWinRate();
+    }
+
+    public String getWinRateString() {
+        double wr = round(getWinRate() * 100, 4);
+        return wr + " %";
     }
 
     public int getTotalGames() {
         return playerStats.getTotalGames();
     }
 
+    public int getTotalGames(int characterId) {
+        return playerStats.getCharacterStats(characterId).getTotalGames();
+    }
+
+    public int getTotalGamesWins() {
+        return playerStats.getTotalGamesWin();
+    }
+
+    public int getTotalGamesWins(int characterId) {
+        return playerStats.getCharacterStats(characterId).getTotalGamesWin();
+    }
+
+    public int getTotalRankedGamesWins() {
+        return playerStats.getTotalRankedGamesWin();
+    }
+
+    public int getTotalGamesLose() {
+        return playerStats.getTotalGamesLose();
+    }
+
+    public int getTotalGamesLose(int characterId) {
+        return playerStats.getCharacterStats(characterId).getTotalGamesLose();
+    }
+
+    public int getTotalRankedGamesLose() {
+        return playerStats.getTotalRankedGamesLose();
+    }
+
+    public int getTotalGamesDisconnects() {
+        return playerStats.getTotalGamesDisconnects();
+    }
+
+    public int getTotalGamesDisconnects(int characterId) {
+        return playerStats.getCharacterStats(characterId).getTotalGamesDisconnects();
+    }
+
     public Character getFavoriteCharacter() {
         return playerStats.getFavoriteCharacter();
-    }
-    @NonNull
-    @Override
-    public String toString() {
-        return this.nickName + " (" + this.mmr + " mmr)";
     }
 
     public void setPlayerStats(PlayerStats playerStats) {
         this.playerStats = playerStats;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.nickName + " (" + this.mmr + " mmr)";
     }
 }

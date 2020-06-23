@@ -4,26 +4,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActivityTwo"
-    android:overScrollMode="ifContentScrolls">
-    <LinearLayout
+    android:overScrollMode="ifContentScrolls"
+    android:background="@color/colorBlack">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
+        <RelativeLayout
+            android:id="@+id/kombats_kombatsOptionsRLId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="kombats"
-            android:textAlignment="center"
-            />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="cls"
-            android:onClick="butClick"/>
+            android:orientation="horizontal"
+            android:background="@color/colorGray">
+            <TextView
+                android:id="@+id/kombats_countKombatsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kombats"
+                android:textSize="18sp"
+                android:padding="5dp"
+                android:layout_alignParentLeft="true"
+                />
+            <Spinner
+                android:id="@+id/kombats_sortParametersSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
         <ListView
+            android:layout_below="@+id/kombats_kombatsOptionsRLId"
+            android:layout_marginTop="5dp"
             android:id="@+id/DKombatListViewId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
-    </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

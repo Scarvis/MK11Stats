@@ -30,7 +30,6 @@ public class MKCore {
         //InitKombatList();
         initCharactersList();
         initPlayer();
-
     }
 
     private void initPlayer() {
@@ -45,22 +44,17 @@ public class MKCore {
     }
 
     private void initCharactersList() {
-//        ArrayList<Variation> arr = new ArrayList<>();
-//        arr.add(new Variation(1, "Searing Rage"));
-//        arr.add(new Variation(2, "Reborn"));
-//        arr.add(new Variation(3, "Burning Specter"));
-//        Character scorp = new Character(1,"Scorpion", arr, R.drawable.scorpion, new DLCCharacter());
-//        ArrayList<Variation> arr2 = new ArrayList<>();
-//        arr2.add(new Variation(1, "Dead of Winter"));
-//        arr2.add(new Variation(2, "Thin Ice"));
-//        arr2.add(new Variation(3, "Avalanche"));
-//        Character sub = new Character(2, "Sub Zero", arr2, R.drawable.sub_zero, new DLCCharacter());
-//        characterList.add(scorp);
-//        characterList.add(sub);
     }
 
-    public void initKombatList(Context context) {
+    private void initKombatList(Context context) {
         databaseAdapter = new DatabaseAdapter(context);
+    }
+
+    private void initPlayerKombats() {
+        getKombatsList();
+        PlayerStats playerStats = new PlayerStats();
+        playerStats.calculate(kombatsList);
+        ownPlayer.setPlayerStats(playerStats);
     }
 
     public void addNewKombat(Kombat kombat) {
@@ -68,6 +62,7 @@ public class MKCore {
         databaseAdapter.insert(kombat);
         databaseAdapter.close();
     }
+
 
     public void setCharacterList(String text) {
         ArrayList<Character> charArrayList = JSONHelper.importCharactersFromJSON(text);
@@ -81,6 +76,7 @@ public class MKCore {
         }
         characterList = charArrayList;
         Character.setCharacterArrayList(characterList);
+        initPlayerKombats();
     }
 
     public void setKombatsList(ArrayList<Kombat> kombatsList) {
